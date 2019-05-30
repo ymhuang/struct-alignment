@@ -24,7 +24,7 @@ void dumpMem( char * p, unsigned long length )
 {
     unsigned long i = 0;
     int j = 0;
-    char t[17];
+    char t[4];
 
     printf("Address: %x\n", p);
 
@@ -40,12 +40,12 @@ void dumpMem( char * p, unsigned long length )
             t[j] = p[i];
         }
 
-        if ( ++j > 17 )
+        if ( ++j > 4 )
         {
             j = 0;
         }
 
-        if ( ((i+1)%16) == 0 )
+        if ( ((i+1)%4) == 0 )
         {
             t[j] = '\0';
             printf("%s\n", t);
@@ -53,14 +53,7 @@ void dumpMem( char * p, unsigned long length )
         }
         else
         {
-            if ( ((i+1)%8) == 0 )
-            {
-                printf("-");
-            }
-            else
-            {
-                printf(" ");
-            }
+            printf(" ");
         }
 
         i++;
@@ -95,13 +88,13 @@ void main()
     ct.b = 'B';
 
     printf("structure A\n");
-    dumpMem( (char *)&at, 16);
+    dumpMem( (char *)&at, sizeof(A) - 1 );
 
     printf("structure B\n");
-    dumpMem( (char *)&bt, 16);
+    dumpMem( (char *)&bt, sizeof(B) - 1 );
 
     printf("structure C\n");
-    dumpMem( (char *)&ct, 16);
+    dumpMem( (char *)&ct, sizeof(C) - 1 );
 
     return;
 }
